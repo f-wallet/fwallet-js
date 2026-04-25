@@ -1,0 +1,11 @@
+{
+  "name": "fwallet-js-sdks",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present"
+  }
+}
