@@ -1,0 +1,45 @@
+name: Publish packages
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: npm-publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish npm packages
+    runs-on: ubuntu-latest
+    environment: release
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build packages
+        run: npm run build --workspaces --if-present
+
+      - name: Publish TypeScript SDK
+        run: npm publish --workspace @f-wallet/typescript --access public --provenance
+
+      - name: Publish Node SDK
+        run: npm publish --workspace @f-wallet/node --access public --provenance
+
+      - name: Publish React SDK
+        run: npm publish --workspace @f-wallet/react --access public --provenance

@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "target": "es6",
+    "target": "es2018",
+    "lib": [
+      "es2018",
+      "dom",
+      "dom.iterable"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "dist",

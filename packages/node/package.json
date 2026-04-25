@@ -4,7 +4,10 @@
     "description": "NodeJS client for @f-wallet/node",
     "repository": {
         "type": "git",
-        "url": "https://github.com/f-wallet/fwallet-js.git"
+        "url": "git+https://github.com/f-wallet/fwallet-js.git"
+    },
+    "publishConfig": {
+        "access": "public"
     },
     "main": "dist/api.js",
     "types": "dist/api.d.ts",

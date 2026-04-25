@@ -5,7 +5,10 @@
   "author": "FWallet",
   "repository": {
     "type": "git",
-    "url": "https://github.com/f-wallet/fwallet-js.git"
+    "url": "git+https://github.com/f-wallet/fwallet-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
