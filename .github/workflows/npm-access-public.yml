@@ -1,0 +1,37 @@
+name: Set npm package access public
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  access:
+    name: Set npm access
+    runs-on: ubuntu-latest
+    environment: release
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Set packages public
+        run: |
+          npm access set status=public @f-wallet/typescript
+          npm access set status=public @f-wallet/node
+          npm access set status=public @f-wallet/react
+
+      - name: Verify packages
+        run: |
+          npm view @f-wallet/typescript version --registry=https://registry.npmjs.org/
+          npm view @f-wallet/node version --registry=https://registry.npmjs.org/
+          npm view @f-wallet/react version --registry=https://registry.npmjs.org/
